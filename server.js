@@ -2,7 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
-
+const path = require('path');
 const connectDB = require("./utils/db");
 const auth = require('./routes/auth')
 const merchant = require("./routes/merchant");
