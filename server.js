@@ -1,12 +1,7 @@
 const express = require("express");
-const bodyParser = require("body-parser");
-const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const path = require('path');
 const connectDB = require("./utils/db");
-const auth = require('./routes/auth')
-const merchant = require("./routes/merchant");
-const client = require("./routes/client");
 
 
 const app = express();
@@ -16,18 +11,11 @@ const PORT = 8080;
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 })
-
-app.use(
-  cors({
-    origin: "*",
-    credentials: true,
-  })
-);
-
-
-app.use("/api/auth", auth);
-app.use("/api/merchant", merchant);
-app.use("/api/view", client);
+app.use(express.json());
+app.use(cors());
+app.use("/api/auth", require('./routes/auth.route'));
+app.use("/api/merchant", require('./routes/merchant.route'));
+app.use("/api/view", require('./routes/client.route'));
 
 connectDB()
   .then(() => {
