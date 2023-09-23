@@ -16,6 +16,7 @@ app.use(cors());
 app.use("/api/auth", require('./routes/auth.route'));
 app.use("/api/merchant", require('./routes/merchant.route'));
 app.use("/api/view", require('./routes/client.route'));
+app.use("/api/otp", require('./routes/otp.route'));
 
 connectDB()
   .then(() => {
