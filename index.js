@@ -11,6 +11,7 @@ const openRepoRoutes = require("./routes/OpenSource");
 const app = express();
 const PORT = process.env.PORT || 8080;
 
+app.use(cors());
 app.use(express.json());
 app.use("/api/bootcamps", bootcampRoutes);
 app.use("/api/events", eventRoutes);
