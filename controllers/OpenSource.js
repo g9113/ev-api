@@ -2,7 +2,7 @@ const asyncErrorHandler = require("../utils/asyncErrorHandler");
 const GithubRepo = require("../models/GithubRepo");
 
 // Create Github Repo
-const createGithubRepo = asyncErrorHandler(async (req, res, next) => {
+const createGithubRepo = async (req, res, next) => {
   const { name, description, owner, url, stars, forks, language } = req.body;
 
   try {
@@ -21,20 +21,20 @@ const createGithubRepo = asyncErrorHandler(async (req, res, next) => {
   } catch (error) {
     next(error);
   }
-});
+};
 
 // Get All Github Repos
-const getAllGithubRepos = asyncErrorHandler(async (req, res, next) => {
+const getAllGithubRepos = async (req, res, next) => {
   try {
     const repos = await GithubRepo.find();
     res.json({ status: "success", data: repos });
   } catch (error) {
     next(error);
   }
-});
+};
 
 // Delete Github Repo
-const deleteGithubRepo = asyncErrorHandler(async (req, res, next) => {
+const deleteGithubRepo = async (req, res, next) => {
   const { id } = req.params;
 
   try {
@@ -46,7 +46,7 @@ const deleteGithubRepo = asyncErrorHandler(async (req, res, next) => {
   } catch (error) {
     next(error);
   }
-});
+};
 
 module.exports = {
   createGithubRepo,

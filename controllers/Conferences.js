@@ -1,7 +1,7 @@
 const asyncErrorHandler = require("../utils/asyncErrorHandler");
 const Conference = require("../models/Conferences");
 
-const createConference = asyncErrorHandler(async (req, res, next) => {
+const createConference = async (req, res, next) => {
   const {
     name,
     description,
@@ -56,9 +56,9 @@ const createConference = asyncErrorHandler(async (req, res, next) => {
   } catch (error) {
     next(error);
   }
-});
+};
 
-const getAllConferences = asyncErrorHandler(async (req, res, next) => {
+const getAllConferences = async (req, res, next) => {
   const { pageNumber, limit } = req.query;
   const query = Conference.find()
     .sort({ createdAt: -1 })
@@ -66,9 +66,9 @@ const getAllConferences = asyncErrorHandler(async (req, res, next) => {
     .limit(Number(limit));
   const events = await query.exec();
   res.json(events);
-});
+};
 
-const deleteConference = asyncErrorHandler(async (req, res, next) => {
+const deleteConference = async (req, res, next) => {
   const { id } = req.params;
 
   try {
@@ -82,7 +82,7 @@ const deleteConference = asyncErrorHandler(async (req, res, next) => {
   } catch (error) {
     next(error);
   }
-});
+};
 
 module.exports = {
   createConference,

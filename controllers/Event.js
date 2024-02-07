@@ -1,7 +1,7 @@
 const asyncErrorHandler = require("../utils/asyncErrorHandler");
 const Event = require("../models/Event");
 
-const createEvent = asyncErrorHandler(async (req, res, next) => {
+const createEvent = async (req, res, next) => {
   const { name, description, link, date, location, organizer } = req.body;
 
   try {
@@ -28,9 +28,9 @@ const createEvent = asyncErrorHandler(async (req, res, next) => {
   } catch (error) {
     return next(error);
   }
-});
+};
 
-const getEvents = asyncErrorHandler(async (req, res, next) => {
+const getEvents = async (req, res, next) => {
   const { pageNumber, limit } = req.query;
   const query = Event.find()
     .sort({ createdAt: -1 })
@@ -38,10 +38,10 @@ const getEvents = asyncErrorHandler(async (req, res, next) => {
     .limit(Number(limit));
   const events = await query.exec();
   res.json(events);
-});
+};
 
 
-const deleteEvent = asyncErrorHandler(async (req, res, next) => {
+const deleteEvent = async (req, res, next) => {
   const { id } = req.params;
 
   try {
@@ -53,7 +53,7 @@ const deleteEvent = asyncErrorHandler(async (req, res, next) => {
   } catch (error) {
     return next(error);
   }
-});
+};
 
 module.exports = {
   createEvent,

@@ -1,7 +1,7 @@
 const asyncErrorHandler = require("../utils/asyncErrorHandler");
 const Hackathon = require("../models/Hackathon");
 
-const createHackathon = asyncErrorHandler(async (req, res, next) => {
+const createHackathon = async (req, res, next) => {
   const { name, description, startDate, endDate, location, organizer, website, registrationLink, tags, sponsors, prizes, contactEmail, createdBy, teamSize, eligibility, rules, judgingCriteria, schedule, additionalInfo } = req.body;
 
   try {
@@ -20,9 +20,9 @@ const createHackathon = asyncErrorHandler(async (req, res, next) => {
   } catch (error) {
     next(error);
   }
-});
+};
 
-const getAllHackathons = asyncErrorHandler(async (req, res, next) => {
+const getAllHackathons = async (req, res, next) => {
   const { pageNumber, limit } = req.query;
   const query = Hackathon.find()
     .sort({ createdAt: -1 })
@@ -30,9 +30,9 @@ const getAllHackathons = asyncErrorHandler(async (req, res, next) => {
     .limit(Number(limit));
   const events = await query.exec();
   res.json(events);
-});
+};
 
-const deleteHackathon = asyncErrorHandler(async (req, res, next) => {
+const deleteHackathon = async (req, res, next) => {
   const { id } = req.params;
 
   try {
@@ -44,7 +44,7 @@ const deleteHackathon = asyncErrorHandler(async (req, res, next) => {
   } catch (error) {
     next(error);
   }
-});
+};
 
 module.exports = {
   createHackathon,
