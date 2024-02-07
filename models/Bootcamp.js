@@ -1,35 +1,51 @@
-const { Schema, model } = require('mongoose');
+const { Schema, model } = require("mongoose");
 
 const bootcampSchema = new Schema(
   {
-    userId: {
-      type: String,
-      required: true,
-    },
-    licenseId: {
-      type: String,
-      required: [true, 'License Id is required'],
-    },
     name: {
       type: String,
-      required: [true, 'Name is required'],
+      required: [true, "Name is required"],
     },
     description: {
       type: String,
-      required: [true, 'Description is required'],
+      required: [true, "Description is required"],
     },
-    link: {
+    website: {
       type: String,
-      required: [true, 'Link is required'],
+      required: [true, "Website URL is required"],
     },
     imageUrl: {
       type: String,
-      required: [true, 'Image URL is required'],
+      required: [true, "Image URL is required"],
+    },
+    location: {
+      type: String,
+      required: [true, "Location is required"],
+    },
+    startDate: {
+      type: Date,
+      required: [true, "Start date is required"],
+    },
+    endDate: {
+      type: Date,
+      required: [true, "End date is required"],
+    },
+    duration: {
+      type: String,
+      required: [true, "Duration is required"],
+    },
+    organizer: {
+      type: String,
+      required: [true, "Organizer is required"],
+    },
+    category: {
+      type: String,
+      required: [true, "Category is required"],
     },
   },
   { timestamps: true }
 );
 
-const Bootcamp = model('bootcamp', bootcampSchema);
+const Bootcamp = model("Bootcamp", bootcampSchema);
 
 module.exports = Bootcamp;

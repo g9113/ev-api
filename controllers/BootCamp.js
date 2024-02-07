@@ -1,0 +1,87 @@
+const asyncErrorHandler = require("../utils/asyncErrorHandler");
+const Bootcamp = require("../models/Bootcamp");
+const Product = require("../models/Conferences");
+
+
+const bootcampCreation = asyncErrorHandler(async (req, res, next) => {
+  const {
+    name,
+    description,
+    website,
+    imageUrl,
+    location,
+    startDate,
+    endDate,
+    duration,
+    organizer,
+    category,
+  } = req.body;
+  try {
+    const bootcampExist = await Bootcamp.findOne({ name });
+    if (bootcampExist) {
+      return res
+        .status(400)
+        .json({ status: "error", message: "Bootcamp already exists" });
+    }
+    const bootcamp = new Bootcamp({
+      name,
+      description,
+      website,
+      imageUrl,
+      location,
+      startDate,
+      endDate,
+      duration,
+      organizer,
+      category,
+    });
+    const result = await bootcamp.save();
+    return res.status(201).json({ status: "success", data: result });
+  } catch (error) {
+    console.log(error);
+    next(error);
+  }
+});
+
+const getBootcamps = asyncErrorHandler(async (req, res, next) => {
+  const { pageNumber, limit } = req.query;
+  const query = Bootcamp.find()
+    .sort({ createdAt: -1 })
+    .skip((Number(pageNumber) - 1) * Number(limit))
+    .limit(Number(limit));
+  const bootcamps = await query.exec();
+  res.json(bootcamps);
+});
+
+const deleteBootcamp = asyncErrorHandler(async (req, res, next) => {
+  const { id } = req.params;
+  try {
+    const deletedBootcamp = await Bootcamp.findByIdAndDelete(id);
+    if (!deletedBootcamp) {
+      return res
+        .status(404)
+        .json({ status: "error", message: "Bootcamp not found" });
+    }
+    res.json({ status: "success", message: "Bootcamp deleted successfully" });
+  } catch (error) {
+    next(error);
+  }
+});
+
+const search = asyncErrorHandler(async (req, res, next) => {
+  const { searchTerm } = req.params;
+  const results = await Product.find({
+    $or: [
+      { name: { $regex: searchTerm, $options: "i" } },
+      { description: { $regex: searchTerm, $options: "i" } },
+    ],
+  }).exec();
+  res.json(results);
+});
+
+module.exports = {
+  bootcampCreation,
+  getBootcamps,
+  deleteBootcamp,
+  search,
+};
