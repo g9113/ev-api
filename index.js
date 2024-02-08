@@ -7,6 +7,7 @@ const eventRoutes = require("./routes/Event");
 const conferenceRoutes = require("./routes/Conferences");
 const hackathonRoutes = require("./routes/Hackathon");
 const openRepoRoutes = require("./routes/OpenSource");
+const liveeventRoutes = require("./routes/liveevents");
 
 const app = express();
 const PORT = process.env.PORT || 4000;
@@ -20,6 +21,7 @@ app.use("/api/events", eventRoutes);
 app.use("/api/conferences", conferenceRoutes);
 app.use("/api/hackathons", hackathonRoutes);
 app.use("/api/openrepo", openRepoRoutes);
+app.use("/api/liveevents", liveeventRoutes);
 
 app.use(express.static(path.join(__dirname, "public")));
 

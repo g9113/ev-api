@@ -1,6 +1,6 @@
 const { Schema, model } = require("mongoose");
 
-const EventSchema = new Schema({
+const EventLiveSchema = new Schema({
   name: {
     type: String,
     required: [true, "Event name is required"],
@@ -9,7 +9,7 @@ const EventSchema = new Schema({
     type: String,
     required: [true, "Link is required"],
   },
-  imglink:{
+  imglink: {
     type: String,
     required: [true, "Image Link is required"],
   },
@@ -29,9 +29,8 @@ const EventSchema = new Schema({
     type: String,
     required: [true, "Organizer is required"],
   },
-
 });
 
-const Event = model("Event", EventSchema);
+const Event = model("EventLive", EventLiveSchema);
 
 module.exports = Event;
