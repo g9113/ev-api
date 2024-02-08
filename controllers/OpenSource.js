@@ -1,32 +1,30 @@
 const asyncErrorHandler = require("../utils/asyncErrorHandler");
-const GithubRepo = require("../models/GithubRepo");
+const Repo = require("../models/GithubRepo");
 
-// Create Github Repo
 const createGithubRepo = async (req, res, next) => {
   const { name, description, owner, url, stars, forks, language } = req.body;
 
   try {
-    const repoExist = await GithubRepo.findOne({ name });
+    const repoExist = await Repo.findOne({ name });
 
     if (repoExist) {
       return res.status(400).json({ status: "error", message: "Repository already exists" });
     }
 
-    const newRepo = new GithubRepo({
+    const newRepo = new Repo({
       name, description, owner, url, stars, forks, language
     });
 
     const result = await newRepo.save();
     return res.status(201).json({ status: "success", data: result });
   } catch (error) {
-    next(error);
+    next(error); // Pass error to error handling middleware
   }
 };
 
-// Get All Github Repos
 const getAllGithubRepos = async (req, res, next) => {
   try {
-    const repos = await GithubRepo.find();
+    const repos = await Repo.find();
     res.json({ status: "success", data: repos });
   } catch (error) {
     next(error);
@@ -38,7 +36,7 @@ const deleteGithubRepo = async (req, res, next) => {
   const { id } = req.params;
 
   try {
-    const deletedRepo = await GithubRepo.findByIdAndDelete(id);
+    const deletedRepo = await Repo.findByIdAndDelete(id);
     if (!deletedRepo) {
       return res.status(404).json({ status: "error", message: "Repository not found" });
     }

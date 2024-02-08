@@ -1,5 +1,4 @@
 const Bootcamp = require("../models/Bootcamp");
-const Product = require("../models/Conferences");
 
 const bootcampCreation = async (req, res, next) => {
   const {
@@ -13,6 +12,9 @@ const bootcampCreation = async (req, res, next) => {
     duration,
     organizer,
     category,
+    teamsize,
+    tags,
+    contactEmail,
   } = req.body;
   try {
     const bootcampExist = await Bootcamp.findOne({ name });
@@ -32,6 +34,9 @@ const bootcampCreation = async (req, res, next) => {
       duration,
       organizer,
       category,
+      teamsize,
+      tags,
+      contactEmail,
     });
     const result = await bootcamp.save();
     return res.status(201).json({ status: "success", data: result });

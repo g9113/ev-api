@@ -42,6 +42,18 @@ const bootcampSchema = new Schema(
       type: String,
       required: [true, "Category is required"],
     },
+    teamsize: {
+      type: Number,
+      required: [true, "Team size is required"],
+    },
+    tags: {
+      type: [String],
+      default: [],
+    },
+    contactEmail: {
+      type: String,
+      required: [true, "Contact email is required"],
+    },
   },
   { timestamps: true }
 );

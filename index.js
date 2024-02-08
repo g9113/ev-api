@@ -9,7 +9,7 @@ const hackathonRoutes = require("./routes/Hackathon");
 const openRepoRoutes = require("./routes/OpenSource");
 
 const app = express();
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 4000;
 
 app.use(cors());
 app.use(express.json());
@@ -18,7 +18,9 @@ app.use("/api/events", eventRoutes);
 app.use("/api/conferences", conferenceRoutes);
 app.use("/api/hackathons", hackathonRoutes);
 app.use("/api/openrepo", openRepoRoutes);
+
 app.use(express.static(path.join(__dirname, "public")));
+
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "index.html"));
 });
