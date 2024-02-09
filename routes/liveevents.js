@@ -1,9 +1,15 @@
 const express = require("express");
 const EventController = require("../controllers/LiveEvents");
 const router = express.Router();
+const authenticate = require("../middlewares/authenticate");
+const authorize = require("../middlewares/authorize");
 
-router.get("/getliveevent", EventController.getliveEvents);
-router.post("/createliveevent", EventController.createliveEvent);
-router.post("/deleteliveevent/:id", EventController.deleteliveEvent);
+router.get("/getliveevent", authorize, EventController.getliveEvents);
+router.post("/createliveevent", authorize, EventController.createliveEvent);
+router.post(
+  "/deleteliveevent/:id",
+  authenticate,
+  EventController.deleteliveEvent
+);
 
 module.exports = router;
