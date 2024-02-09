@@ -1,8 +1,8 @@
-const dotenv = require('dotenv');
-const jwt = require('jsonwebtoken');
-const createHttpError = require('http-errors');
-const asyncErrorHandler = require('../utils/asyncErrorHandler');
-const User = require('../models/User');
+const dotenv = require("dotenv");
+const jwt = require("jsonwebtoken");
+const createHttpError = require("http-errors");
+const asyncErrorHandler = require("../utils/asyncErrorHandler");
+const User = require("../models/User");
 
 dotenv.config();
 
@@ -16,12 +16,12 @@ const authenticate = asyncErrorHandler(async (req, res, next) => {
         req.userId = userData._id;
         return next();
       }
-      return next(createHttpError(401, 'Only merchants are allowed'));
+      return next(createHttpError(401, "Only admins are allowed"));
     } else {
-      return next(createHttpError(401, 'Invalid token'));
+      return next(createHttpError(401, "Invalid token"));
     }
   } else {
-    return next(createHttpError(404, 'Token not found'));
+    return next(createHttpError(404, "Token not found"));
   }
 });
 

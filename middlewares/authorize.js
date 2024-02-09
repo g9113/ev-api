@@ -1,8 +1,6 @@
 const dotenv = require('dotenv');
 const createHttpError = require('http-errors');
-
 dotenv.config();
-
 const authorize = (req, res, next) => {
   const authKey = req.headers.authorization;
 
