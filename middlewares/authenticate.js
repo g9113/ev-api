@@ -9,7 +9,7 @@ const authenticate = asyncErrorHandler(async (req, res, next) => {
   const token = req.headers.authorization;
   if (token) {
     try {
-      const token = process.env.SERVERTOKEN;
+      const servertoken = process.env.SERVERTOKEN;
       if (!servertoken) throw new Error("Server token not found");
       if (token !== servertoken) throw new Error("Invalid token");
       if (servertoken === token) return next();
