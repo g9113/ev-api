@@ -9,14 +9,6 @@ Welcome to the CodeHub API Documentation. CodeHub is a platform that provides AP
 
 To use the CodeHub API, you don't need to install anything. Simply make HTTP requests to the provided endpoints.
 
-## Base URL
-
-The base URL for accessing the CodeHub API is:
-
-```
-https://api.codehub.com
-```
-
 ## Authentication
 
 Authentication is required for accessing certain endpoints. You need to obtain an API key by registering an account on CodeHub and use it in the request headers as follows:
