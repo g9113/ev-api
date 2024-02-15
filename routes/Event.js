@@ -7,5 +7,6 @@ const authorize = require("../middlewares/authorize");
 router.get("/getevent", authorize, EventController.getEvents);
 router.post("/createevent", authorize, EventController.createEvent);
 router.post("/deleteevent/:id", authenticate, EventController.deleteEvent);
+router.get("/getevent/:id", authenticate, EventController.getEventsbyid);
 
 module.exports = router;

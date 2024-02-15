@@ -16,4 +16,10 @@ router.get(
   HackathonController.getAllHackathons
 );
 
+router.get(
+  "/gethackathon/:id",
+  authenticate,
+  HackathonController.getHackathonbyid
+);
+
 module.exports = router;

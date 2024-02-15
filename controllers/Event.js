@@ -55,8 +55,25 @@ const deleteEvent = async (req, res, next) => {
   }
 };
 
+
+const getEventsbyid = async (req, res, next) => {
+  const { id } = req.params;
+  try {
+    const Event = await Event.findById(id);
+    if (!bootcamp) {
+      return res
+        .status(404)
+        .json({ status: "error", message: "Bootcamp not found" });
+    }
+    res.json(Event);
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
   createEvent,
   getEvents,
-  deleteEvent
+  deleteEvent,
+  getEventsbyid
 };

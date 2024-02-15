@@ -68,6 +68,20 @@ const getAllConferences = async (req, res, next) => {
   res.json(events);
 };
 
+const getconferencebyid = async (req, res, next) => {
+  const { id } = req.params;
+  try {
+    const Conference = await Conference.findById(id);
+    if (!bootcamp) {
+      return res
+        .status(404)
+        .json({ status: "error", message: "Bootcamp not found" });
+    }
+    res.json(Conference);
+  } catch (error) {
+    next(error);
+  }
+};
 const deleteConference = async (req, res, next) => {
   const { id } = req.params;
 
@@ -88,4 +102,5 @@ module.exports = {
   createConference,
   getAllConferences,
   deleteConference,
+  getconferencebyid,
 };

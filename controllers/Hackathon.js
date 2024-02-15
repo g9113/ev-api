@@ -46,8 +46,25 @@ const deleteHackathon = async (req, res, next) => {
   }
 };
 
+
+const getHackathonbyid = async (req, res, next) => {
+  const { id } = req.params;
+  try {
+    const Hackathon = await Hackathon.findById(id);
+    if (!bootcamp) {
+      return res
+        .status(404)
+        .json({ status: "error", message: "Bootcamp not found" });
+    }
+    res.json(Hackathon);
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
   createHackathon,
   getAllHackathons,
-  deleteHackathon
+  deleteHackathon,
+  getHackathonbyid
 };

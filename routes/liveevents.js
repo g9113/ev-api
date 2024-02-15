@@ -11,5 +11,10 @@ router.post(
   authenticate,
   EventController.deleteliveEvent
 );
+router.get(
+  "/getliveevent/:id",
+  authenticate,
+  EventController.getLiveEventbyid
+);
 
 module.exports = router;

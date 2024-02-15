@@ -29,6 +29,24 @@ const createliveEvent = async (req, res, next) => {
     return next(error);
   }
 };
+
+
+const getLiveEventbyid = async (req, res, next) => {
+  const { id } = req.params;
+  try {
+    const Event = await Event.findById(id);
+    if (!bootcamp) {
+      return res
+        .status(404)
+        .json({ status: "error", message: "Bootcamp not found" });
+    }
+    res.json(Event);
+  } catch (error) {
+    next(error);
+  }
+};
+
+
 const getliveEvents = async (req, res, next) => {
   const { pageNumber, limit } = req.query;
   const query = Event.find()
@@ -55,5 +73,6 @@ const deleteliveEvent = async (req, res, next) => {
 module.exports = {
     createliveEvent,
     getliveEvents,
+    getLiveEventbyid,
     deleteliveEvent
 };

@@ -1,5 +1,6 @@
 const Bootcamp = require("../models/Bootcamp");
 
+
 const bootcampCreation = async (req, res, next) => {
   const {
     name,
@@ -46,6 +47,7 @@ const bootcampCreation = async (req, res, next) => {
   }
 };
 
+
 const getBootcamps = async (req, res, next) => {
   const { pageNumber, limit } = req.query;
   try {
@@ -59,6 +61,23 @@ const getBootcamps = async (req, res, next) => {
     next(error);
   }
 };
+
+
+const getBootcampsbyid = async (req, res, next) => {
+  const { id } = req.params;
+  try {
+    const bootcamp = await Bootcamp.findById(id);
+    if (!bootcamp) {
+      return res
+        .status(404)
+        .json({ status: "error", message: "Bootcamp not found" });
+    }
+    res.json(bootcamp);
+  } catch (error) {
+    next(error);
+  }
+};
+
 
 const deleteBootcamp = async (req, res, next) => {
   const { id } = req.params;
@@ -94,5 +113,6 @@ module.exports = {
   bootcampCreation,
   getBootcamps,
   deleteBootcamp,
+  getBootcampsbyid,
   search,
 };

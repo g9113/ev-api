@@ -8,11 +8,19 @@ const createGithubRepo = async (req, res, next) => {
     const repoExist = await Repo.findOne({ name });
 
     if (repoExist) {
-      return res.status(400).json({ status: "error", message: "Repository already exists" });
+      return res
+        .status(400)
+        .json({ status: "error", message: "Repository already exists" });
     }
 
     const newRepo = new Repo({
-      name, description, owner, url, stars, forks, language
+      name,
+      description,
+      owner,
+      url,
+      stars,
+      forks,
+      language,
     });
 
     const result = await newRepo.save();
@@ -31,14 +39,29 @@ const getAllGithubRepos = async (req, res, next) => {
   }
 };
 
-// Delete Github Repo
+const getRepobyid = async (req, res, next) => {
+  const { id } = req.params;
+  try {
+    const Repo = await Repo.findById(id);
+    if (!bootcamp) {
+      return res
+        .status(404)
+        .json({ status: "error", message: "Bootcamp not found" });
+    }
+    res.json(Repo);
+  } catch (error) {
+    next(error);
+  }
+};
 const deleteGithubRepo = async (req, res, next) => {
   const { id } = req.params;
 
   try {
     const deletedRepo = await Repo.findByIdAndDelete(id);
     if (!deletedRepo) {
-      return res.status(404).json({ status: "error", message: "Repository not found" });
+      return res
+        .status(404)
+        .json({ status: "error", message: "Repository not found" });
     }
     res.json({ status: "success", message: "Repository deleted successfully" });
   } catch (error) {
@@ -49,5 +72,6 @@ const deleteGithubRepo = async (req, res, next) => {
 module.exports = {
   createGithubRepo,
   getAllGithubRepos,
-  deleteGithubRepo
+  deleteGithubRepo,
+  getRepobyid,
 };

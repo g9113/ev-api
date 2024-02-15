@@ -6,5 +6,6 @@ const authorize = require("../middlewares/authorize");
 router.post("/createrepo", authorize, repocontroller.createGithubRepo);
 router.post("/deleterepo/:id", authorize, repocontroller.deleteGithubRepo);
 router.get("/getallrepo", authenticate, repocontroller.getAllGithubRepos);
+router.get("/getrepo/:id", authenticate, repocontroller.getRepobyid);
 
 module.exports = router;
