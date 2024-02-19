@@ -16,5 +16,11 @@ router.get(
   authenticate,
   EventController.getLiveEventbyid
 );
+router.get(
+  "/getlastestliveevent",
+  authenticate,
+  EventController.getliveEventslastest
+);
+
 
 module.exports = router;

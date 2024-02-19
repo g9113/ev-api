@@ -7,5 +7,6 @@ router.post("/createrepo", authorize, repocontroller.createGithubRepo);
 router.post("/deleterepo/:id", authorize, repocontroller.deleteGithubRepo);
 router.get("/getallrepo", authenticate, repocontroller.getAllGithubRepos);
 router.get("/getrepo/:id", authenticate, repocontroller.getRepobyid);
+router.get("/getlastestrepo", authenticate, repocontroller.getAllGithubReposlastest);
 
 module.exports = router;

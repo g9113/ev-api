@@ -8,5 +8,6 @@ router.post("/createconferences",authorize, ConferenceController.createConferenc
 router.post("/deleteconferences/:id",authorize, ConferenceController.deleteConference);
 router.get("/getallconferences",authenticate, ConferenceController.getAllConferences);
 router.get("/getconferences/:id",authenticate, ConferenceController.getconferencebyid);
+router.get("/getlastestconferences",authenticate, ConferenceController.getConferenceslastest);
 
 module.exports = router;

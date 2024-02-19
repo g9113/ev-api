@@ -30,13 +30,25 @@ const createGithubRepo = async (req, res, next) => {
   }
 };
 
+
 const getAllGithubRepos = async (req, res, next) => {
-  try {
-    const repos = await Repo.find();
-    res.json({ status: "success", data: repos });
-  } catch (error) {
-    next(error);
-  }
+  const { pageNumber, limit } = req.query;
+  const query = Repo.find()
+    .sort({ createdAt: -1 })
+    .skip((Number(pageNumber) - 1) * Number(limit))
+    .limit(Number(limit));
+  const events = await query.exec();
+  res.json(events);
+};
+
+
+const getAllGithubReposlastest = async (req, res, next) => {
+  const { pageNumber, limit } = req.query;
+  const query = Repo.find()
+    .sort({ createdAt: -1 })
+    .limit(1);
+  const events = await query.exec();
+  res.json(events);
 };
 
 const getRepobyid = async (req, res, next) => {
@@ -73,5 +85,6 @@ module.exports = {
   createGithubRepo,
   getAllGithubRepos,
   deleteGithubRepo,
+  getAllGithubReposlastest,
   getRepobyid,
 };

@@ -68,6 +68,18 @@ const getAllConferences = async (req, res, next) => {
   res.json(events);
 };
 
+const getConferenceslastest = async (req, res, next) => {
+  try {
+    const query = Conference.find()
+      .sort({ createdAt: -1 })
+      .limit(1); 
+    const latestConference = await query.exec();
+    res.json(latestConference);
+  } catch (error) {
+    next(error);
+  }
+};
+
 const getconferencebyid = async (req, res, next) => {
   const { id } = req.params;
   try {
@@ -103,4 +115,5 @@ module.exports = {
   getAllConferences,
   deleteConference,
   getconferencebyid,
+  getConferenceslastest,
 };

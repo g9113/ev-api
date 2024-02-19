@@ -32,6 +32,18 @@ const getAllHackathons = async (req, res, next) => {
   res.json(events);
 };
 
+
+
+const getAllHackathonslastest = async (req, res, next) => {
+  const { pageNumber, limit } = req.query;
+  const query = Hackathon.find()
+    .sort({ createdAt: -1 })
+    .limit(1);
+  const events = await query.exec();
+  res.json(events);
+}; 
+
+
 const deleteHackathon = async (req, res, next) => {
   const { id } = req.params;
 
@@ -66,5 +78,6 @@ module.exports = {
   createHackathon,
   getAllHackathons,
   deleteHackathon,
+  getAllHackathonslastest,
   getHackathonbyid
 };

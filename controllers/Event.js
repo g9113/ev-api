@@ -41,6 +41,17 @@ const getEvents = async (req, res, next) => {
 };
 
 
+
+const getEventslastest = async (req, res, next) => {
+  const { pageNumber, limit } = req.query;
+  const query = Event.find()
+    .sort({ createdAt: -1 })
+    .limit(1);
+  const events = await query.exec();
+  res.json(events);
+};
+
+
 const deleteEvent = async (req, res, next) => {
   const { id } = req.params;
 
@@ -75,5 +86,6 @@ module.exports = {
   createEvent,
   getEvents,
   deleteEvent,
+  getEventslastest,
   getEventsbyid
 };

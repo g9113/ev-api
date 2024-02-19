@@ -8,5 +8,6 @@ router.get("/getevent", authorize, EventController.getEvents);
 router.post("/createevent", authorize, EventController.createEvent);
 router.post("/deleteevent/:id", authenticate, EventController.deleteEvent);
 router.get("/getevent/:id", authenticate, EventController.getEventsbyid);
+router.get("/getlastestevent", authenticate, EventController.getEventslastest);
 
 module.exports = router;

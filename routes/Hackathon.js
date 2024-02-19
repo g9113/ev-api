@@ -21,5 +21,10 @@ router.get(
   authenticate,
   HackathonController.getHackathonbyid
 );
+router.get(
+  "/getlastesthackathon",
+  authenticate,
+  HackathonController.getAllHackathonslastest
+);
 
 module.exports = router;

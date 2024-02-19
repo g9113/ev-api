@@ -56,6 +56,18 @@ const getliveEvents = async (req, res, next) => {
   const events = await query.exec();
   res.json(events);
 };
+
+
+
+const getliveEventslastest = async (req, res, next) => {
+  const { pageNumber, limit } = req.query;
+  const query = Event.find()
+    .sort({ createdAt: -1 })
+    .limit(1);
+  const events = await query.exec();
+  res.json(events);
+};
+
 const deleteliveEvent = async (req, res, next) => {
   const { id } = req.params;
 
@@ -70,9 +82,12 @@ const deleteliveEvent = async (req, res, next) => {
   }
 };
 
+
+
 module.exports = {
     createliveEvent,
     getliveEvents,
     getLiveEventbyid,
+    getliveEventslastest,
     deleteliveEvent
 };
