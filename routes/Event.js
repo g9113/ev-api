@@ -4,7 +4,7 @@ const router = express.Router();
 const authenticate = require("../middlewares/authenticate");
 const authorize = require("../middlewares/authorize");
 
-router.get("/getevent", authorize, EventController.getEvents);
+router.get("/getevent", authenticate, EventController.getEvents);
 router.post("/createevent", authorize, EventController.createEvent);
 router.post("/deleteevent/:id", authenticate, EventController.deleteEvent);
 router.get("/getevent/:id", authenticate, EventController.getEventsbyid);

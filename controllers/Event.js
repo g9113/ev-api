@@ -2,13 +2,14 @@ const asyncErrorHandler = require("../utils/asyncErrorHandler");
 const Event = require("../models/Event");
 
 const createEvent = async (req, res, next) => {
-  const { name, description, link, date, location, organizer } = req.body;
+  const { name, description,imglink, link, date, location, organizer } = req.body;
 
   try {
     const eventExist = await Event.findOne({ name });
 
     if (!eventExist) {
       const newEvent = new Event({
+        imglink,
         name,
         description,
         link,
@@ -70,13 +71,13 @@ const deleteEvent = async (req, res, next) => {
 const getEventsbyid = async (req, res, next) => {
   const { id } = req.params;
   try {
-    const Event = await Event.findById(id);
-    if (!bootcamp) {
+    const event = await Event.findById(id);
+    if (!event) {
       return res
         .status(404)
         .json({ status: "error", message: "Bootcamp not found" });
     }
-    res.json(Event);
+    res.json(event);
   } catch (error) {
     next(error);
   }
