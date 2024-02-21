@@ -54,13 +54,13 @@ const getAllGithubReposlastest = async (req, res, next) => {
 const getRepobyid = async (req, res, next) => {
   const { id } = req.params;
   try {
-    const Repo = await Repo.findById(id);
-    if (!bootcamp) {
+    const repo = await Repo.findById(id);
+    if (!repo) {
       return res
         .status(404)
         .json({ status: "error", message: "Bootcamp not found" });
     }
-    res.json(Repo);
+    res.json(repo);
   } catch (error) {
     next(error);
   }

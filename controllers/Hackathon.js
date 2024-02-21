@@ -2,17 +2,55 @@ const asyncErrorHandler = require("../utils/asyncErrorHandler");
 const Hackathon = require("../models/Hackathon");
 
 const createHackathon = async (req, res, next) => {
-  const { name, description, startDate, endDate, location, organizer, website, registrationLink, tags, sponsors, prizes, contactEmail, createdBy, teamSize, eligibility, rules, judgingCriteria, schedule, additionalInfo } = req.body;
+  const {
+    name,
+    description,
+    startDate,
+    endDate,
+    location,
+    organizer,
+    website,
+    registrationLink,
+    tags,
+    sponsors,
+    prizes,
+    contactEmail,
+    teamSize,
+    eligibility,
+    rules,
+    judgingCriteria,
+    schedule,
+    additionalInfo,
+  } = req.body;
 
   try {
     const hackathonExist = await Hackathon.findOne({ name });
 
     if (hackathonExist) {
-      return res.status(400).json({ status: "error", message: "Hackathon already exists" });
+      return res
+        .status(400)
+        .json({ status: "error", message: "Hackathon already exists" });
     }
 
     const newHackathon = new Hackathon({
-      name, description, startDate, endDate, location, organizer, website, registrationLink, tags, sponsors, prizes, contactEmail, createdBy, teamSize, eligibility, rules, judgingCriteria, schedule, additionalInfo
+      name,
+      description,
+      startDate,
+      endDate,
+      location,
+      organizer,
+      website,
+      registrationLink,
+      tags,
+      sponsors,
+      prizes,
+      contactEmail,
+      teamSize,
+      eligibility,
+      rules,
+      judgingCriteria,
+      schedule,
+      additionalInfo,
     });
 
     const result = await newHackathon.save();
@@ -32,17 +70,12 @@ const getAllHackathons = async (req, res, next) => {
   res.json(events);
 };
 
-
-
 const getAllHackathonslastest = async (req, res, next) => {
   const { pageNumber, limit } = req.query;
-  const query = Hackathon.find()
-    .sort({ createdAt: -1 })
-    .limit(1);
+  const query = Hackathon.find().sort({ createdAt: -1 }).limit(1);
   const events = await query.exec();
   res.json(events);
-}; 
-
+};
 
 const deleteHackathon = async (req, res, next) => {
   const { id } = req.params;
@@ -50,7 +83,9 @@ const deleteHackathon = async (req, res, next) => {
   try {
     const deletedHackathon = await Hackathon.findByIdAndDelete(id);
     if (!deletedHackathon) {
-      return res.status(404).json({ status: "error", message: "Hackathon not found" });
+      return res
+        .status(404)
+        .json({ status: "error", message: "Hackathon not found" });
     }
     res.json({ status: "success", message: "Hackathon deleted successfully" });
   } catch (error) {
@@ -58,17 +93,16 @@ const deleteHackathon = async (req, res, next) => {
   }
 };
 
-
 const getHackathonbyid = async (req, res, next) => {
   const { id } = req.params;
   try {
-    const Hackathon = await Hackathon.findById(id);
-    if (!bootcamp) {
+    const hackathon = await Hackathon.findById(id);
+    if (!hackathon) {
       return res
         .status(404)
         .json({ status: "error", message: "Bootcamp not found" });
     }
-    res.json(Hackathon);
+    res.json(hackathon);
   } catch (error) {
     next(error);
   }
@@ -79,5 +113,5 @@ module.exports = {
   getAllHackathons,
   deleteHackathon,
   getAllHackathonslastest,
-  getHackathonbyid
+  getHackathonbyid,
 };

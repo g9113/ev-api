@@ -83,13 +83,13 @@ const getConferenceslastest = async (req, res, next) => {
 const getconferencebyid = async (req, res, next) => {
   const { id } = req.params;
   try {
-    const Conference = await Conference.findById(id);
-    if (!bootcamp) {
+    const conference = await Conference.findById(id);
+    if (!conference) {
       return res
         .status(404)
         .json({ status: "error", message: "Bootcamp not found" });
     }
-    res.json(Conference);
+    res.json(conference);
   } catch (error) {
     next(error);
   }

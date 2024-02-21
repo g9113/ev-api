@@ -30,14 +30,6 @@ const repoSchema = new Schema(
       type: String,
       required: [true, "Owner username is required"],
     },
-    created_at: {
-      type: Date,
-      required: [true, "Creation date is required"],
-    },
-    updated_at: {
-      type: Date,
-      required: [true, "Last update date is required"],
-    },
   },
   { timestamps: true }
 );

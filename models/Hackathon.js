@@ -48,11 +48,6 @@ const HackathonSchema = new Schema({
     type: String,
     required: [true, "Contact email is required"],
   },
-  createdBy: {
-    type: Schema.Types.ObjectId,
-    ref: "User",
-    required: [true, "Created by user ID is required"],
-  },
   teamSize: {
     type: Number,
     required: [true, "Team size is required"],

@@ -42,10 +42,6 @@ const bootcampSchema = new Schema(
       type: String,
       required: [true, "Category is required"],
     },
-    teamsize: {
-      type: Number,
-      required: [true, "Team size is required"],
-    },
     tags: {
       type: [String],
       default: [],
