@@ -4,6 +4,7 @@ const Conference = require("../models/Conferences");
 const createConference = async (req, res, next) => {
   const {
     name,
+    imglink,
     description,
     startDate,
     endDate,
@@ -33,6 +34,7 @@ const createConference = async (req, res, next) => {
 
     const newConference = new Conference({
       name,
+      imglink,
       description,
       startDate,
       endDate,
