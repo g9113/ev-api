@@ -5,6 +5,9 @@ const createHackathon = async (req, res, next) => {
   const {
     name,
     description,
+    imglink,
+    theme,
+
     startDate,
     endDate,
     location,
@@ -33,6 +36,8 @@ const createHackathon = async (req, res, next) => {
     }
 
     const newHackathon = new Hackathon({
+      theme,
+      imglink,
       name,
       description,
       startDate,

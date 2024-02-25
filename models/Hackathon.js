@@ -68,6 +68,14 @@ const HackathonSchema = new Schema({
     type: String,
     required: [true, "Event schedule is required"],
   },
+  imglink:{
+    type: String,
+    required: [true, "Image link is required"],
+  },
+  theme: {
+    type: String,
+    required: [true, "Theme is required"],
+  },
   additionalInfo: {
     type: String,
   },

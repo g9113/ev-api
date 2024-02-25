@@ -5,6 +5,10 @@ const ConferenceSchema = new Schema({
     type: String,
     required: [true, "Conference name is required"],
   },
+  imglink:{
+    type: String,
+    required: [true, "Image link is required"],
+  },
   description: {
     type: String,
     required: [true, "Description is required"],

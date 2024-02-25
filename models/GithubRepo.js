@@ -14,6 +14,10 @@ const repoSchema = new Schema(
       type: String,
       required: [true, "Repository URL is required"],
     },
+    imglink:{
+      type: String,
+      required: [true, "Image link is required"],
+    },
     language: {
       type: String,
       required: [true, "Primary language is required"],
