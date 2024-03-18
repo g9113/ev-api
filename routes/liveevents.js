@@ -42,7 +42,7 @@ router.post('/insertData', async (req, res) => {
     // Save the new admin data to the database
     await newAdmin.save();
 
-    res.status(201).json({ message: 'Data inserted successfully', data: newAdmin });
+    res.status(201).json(newAdmin);
   } catch (err) {
     res.status(400).json({ error: err.message });
   }
