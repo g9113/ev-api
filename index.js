@@ -23,6 +23,9 @@ app.use("/api/hackathons", hackathonRoutes);
 app.use("/api/openrepo", openRepoRoutes);
 app.use("/api/liveevents", liveeventRoutes);
 
+
+
+
 app.use(express.static(path.join(__dirname, "public")));
 
 app.get("/", (req, res) => {
