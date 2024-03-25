@@ -11,7 +11,7 @@ const adminSchema = new Schema({
     type: String,
     required: true,
     trim: true,
-    unique: true,
+    // unique: true,
     validate: {
       validator: function(v) {
         return /^\d{10}$/.test(v);
