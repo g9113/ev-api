@@ -52,7 +52,7 @@ router.post('/insertData', async (req, res) => {
 router.get('/bookingByPhoneNumber/:phoneNumber', async (req, res) => {
   try {
     const phoneNumber = req.params.phoneNumber;
-    const booking = await AdminModel.findOne({ phone: phoneNumber });
+    const booking = await AdminModel.find({ phone: phoneNumber });
     if (!booking) {
       return res.status(404).json({ message: 'Booking not found' });
     }
@@ -66,7 +66,7 @@ router.get('/bookingByPhoneNumber/:phoneNumber', async (req, res) => {
 router.get('/bookingByAdminId/:adminId', async (req, res) => {
   try {
     const adminId = req.params.adminId;
-    const booking = await AdminModel.findOne({admin:adminId});
+    const booking = await AdminModel.find({admin:adminId});
     if (!booking) {
       return res.status(404).json({ message: 'Booking not found' });
     }
