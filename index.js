@@ -16,7 +16,7 @@ app.use(cors());
 app.use(express.json());
 
 
-app.use("/api/bootcamps", bootcampRoutes);
+app.use("/api/register", bootcampRoutes);
 app.use("/api/events", eventRoutes);
 app.use("/api/conferences", conferenceRoutes);
 app.use("/api/hackathons", hackathonRoutes);
